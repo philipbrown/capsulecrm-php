@@ -1,0 +1,23 @@
+{
+    "name": "philipbrown/capsulecrm-php",
+    "description": "Active Record style PHP SDK for CapsuleCRM",
+    "keywords": ["Active Record", "sdk", "CapsuleCRM"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Philip Brown",
+            "email": "phil@ipbrown.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "PhilipBrown\\CapsuleCRM\\": "src"
+        }
+    },
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.0.*"
+    }
+}
