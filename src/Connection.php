@@ -68,9 +68,7 @@ class Connection {
    */
   public function post($url, $body)
   {
-    $response = $this->client()->post($url, ['body' => $body]);
-
-    return $this->processPostResponse($response);
+    return $this->client()->post($url, ['body' => $body]);
   }
 
   /**
