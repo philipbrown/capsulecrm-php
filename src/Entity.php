@@ -1,6 +1,7 @@
 <?php namespace PhilipBrown\CapsuleCRM;
 
 use Exception;
+use PhilipBrown\CapsuleCRM\Meta\Base;
 
 abstract class Entity {
 
@@ -99,6 +100,16 @@ abstract class Entity {
   protected function setAttribute($key, $value)
   {
     $this->attributes[$key] = $value;
+  }
+
+  /**
+   * Return the base meta class
+   *
+   * @return PhilipBrown\CapsuleCRM\Meta\Base
+   */
+  public function base()
+  {
+    return new Base($this);
   }
 
   /**

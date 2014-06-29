@@ -4,16 +4,24 @@ use PhilipBrown\CapsuleCRM\Connection;
 
 class EntityTest extends PHPUnit_Framework_TestCase {
 
+  public function setUp()
+  {
+    $this->entity = new EntityStub(new Connection('', ''), ['name' => 'Philip Brown']);
+  }
+
   public function testConnectionMethodHasConnection()
   {
-    $entity = new EntityStub(new Connection('', ''));
-    $this->assertInstanceOf('PhilipBrown\CapsuleCRM\Connection', $entity->connection());
+    $this->assertInstanceOf('PhilipBrown\CapsuleCRM\Connection', $this->entity->connection());
   }
 
   public function testSettingAnArrayOfAttributes()
   {
-    $entity = new EntityStub(new Connection('', ''), ['name' => 'Philip Brown']);
-    $this->assertEquals('Philip Brown', $entity->name);
+    $this->assertEquals('Philip Brown', $this->entity->name);
+  }
+
+  public function testGetSingularEntityName()
+  {
+    $this->assertEquals('entitystubs', $this->entity->base()->lowercase()->plural());
   }
 
 }
