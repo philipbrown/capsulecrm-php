@@ -1,24 +1,32 @@
 <?php
 
-class EntityTest extends PHPUnit_Framework_TestCase {
+use PhilipBrown\CapsuleCRM\Connection;
 
-  public function setUp()
-  {
-    $this->entity = new EntityStub(new PhilipBrown\CapsuleCRM\Connection('', ''));
-  }
+class EntityTest extends PHPUnit_Framework_TestCase {
 
   public function testConnectionMethodHasConnection()
   {
-    $this->assertInstanceOf('PhilipBrown\CapsuleCRM\Connection', $this->entity->connection());
+    $entity = new EntityStub(new Connection('', ''));
+    $this->assertInstanceOf('PhilipBrown\CapsuleCRM\Connection', $entity->connection());
+  }
+
+  public function testSettingAnArrayOfAttributes()
+  {
+    $entity = new EntityStub(new Connection('', ''), ['name' => 'Philip Brown']);
+    $this->assertEquals('Philip Brown', $entity->name);
   }
 
 }
 
 class EntityStub extends PhilipBrown\CapsuleCRM\Entity {
 
-  public function __construct(PhilipBrown\CapsuleCRM\Connection $connection)
+  protected $fillable = ['name'];
+
+  public function __construct(Connection $connection, $attributes = [])
   {
     parent::__construct($connection);
+
+    $this->fill($attributes);
   }
 
 }
