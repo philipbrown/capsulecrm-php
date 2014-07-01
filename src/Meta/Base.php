@@ -1,7 +1,7 @@
 <?php namespace PhilipBrown\CapsuleCRM\Meta;
 
 use ReflectionClass;
-use PhilipBrown\CapsuleCRM\Entity;
+use PhilipBrown\CapsuleCRM\Model;
 
 class Base {
 
@@ -15,12 +15,12 @@ class Base {
   /**
    * The class to inspect
    *
-   * @param PhilipBrown\CapsuleCRM\Entity $entity
+   * @param PhilipBrown\CapsuleCRM\model $model
    * @return void
    */
-  public function __construct(Entity $entity)
+  public function __construct(Model $model)
   {
-    $this->reflection = new ReflectionClass($entity);
+    $this->reflection = new ReflectionClass($model);
   }
 
   /**

@@ -2,31 +2,31 @@
 
 use PhilipBrown\CapsuleCRM\Connection;
 
-class EntityTest extends PHPUnit_Framework_TestCase {
+class ModelTest extends PHPUnit_Framework_TestCase {
 
   public function setUp()
   {
-    $this->entity = new EntityStub(new Connection('', ''), ['name' => 'Philip Brown']);
+    $this->model = new ModelStub(new Connection('', ''), ['name' => 'Philip Brown']);
   }
 
   public function testConnectionMethodHasConnection()
   {
-    $this->assertInstanceOf('PhilipBrown\CapsuleCRM\Connection', $this->entity->connection());
+    $this->assertInstanceOf('PhilipBrown\CapsuleCRM\Connection', $this->model->connection());
   }
 
   public function testSettingAnArrayOfAttributes()
   {
-    $this->assertEquals('Philip Brown', $this->entity->name);
+    $this->assertEquals('Philip Brown', $this->model->name);
   }
 
   public function testGetSingularEntityName()
   {
-    $this->assertEquals('entitystubs', $this->entity->base()->lowercase()->plural());
+    $this->assertEquals('modelstubs', $this->model->base()->lowercase()->plural());
   }
 
 }
 
-class EntityStub extends PhilipBrown\CapsuleCRM\Entity {
+class ModelStub extends PhilipBrown\CapsuleCRM\Model {
 
   protected $fillable = ['name'];
 

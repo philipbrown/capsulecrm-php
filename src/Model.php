@@ -3,7 +3,7 @@
 use Exception;
 use PhilipBrown\CapsuleCRM\Meta\Base;
 
-abstract class Entity {
+abstract class Model {
 
   /**
    * The HTTP connection
