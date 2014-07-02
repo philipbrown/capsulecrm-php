@@ -5,14 +5,14 @@ use Illuminate\Support\Pluralizer;
 class Name {
 
   /**
-   * The class name
+   * The name
    *
    * @var string
    */
   protected $name;
 
   /**
-   * Create a new ClassName instance
+   * Create a new Name instance
    *
    * @param string $name
    * @return void
@@ -25,7 +25,7 @@ class Name {
   /**
    * Convert the name to lowercase
    *
-   * @return PhilipBrown\CapsuleCRM\Meta\ClassName
+   * @return PhilipBrown\CapsuleCRM\Meta\Name
    */
   public function lowercase()
   {
@@ -35,7 +35,7 @@ class Name {
   /**
    * Convert the name to uppercase
    *
-   * @return PhilipBrown\CapsuleCRM\Meta\ClassName
+   * @return PhilipBrown\CapsuleCRM\Meta\Name
    */
   public function uppercase()
   {
@@ -45,7 +45,7 @@ class Name {
   /**
    * Convert the name to plural
    *
-   * @return PhilipBrown\CapsuleCRM\Meta\ClassName
+   * @return PhilipBrown\CapsuleCRM\Meta\Name
    */
   public function plural()
   {
@@ -55,7 +55,7 @@ class Name {
   /**
    * Convert the name to singular
    *
-   * @return PhilipBrown\CapsuleCRM\Meta\ClassName
+   * @return PhilipBrown\CapsuleCRM\Meta\Name
    */
   public function singular()
   {
