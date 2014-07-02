@@ -19,6 +19,12 @@ class ModelTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals('Philip Brown', $this->model->name);
   }
 
+  public function testSettingAProperty()
+  {
+    $this->model->email = 'phil@ipbrown.com';
+    $this->assertEquals('phil@ipbrown.com', $this->model->email);
+  }
+
   public function testGetSingularEntityName()
   {
     $this->assertEquals('modelstubs', $this->model->base()->lowercase()->plural());
@@ -28,7 +34,7 @@ class ModelTest extends PHPUnit_Framework_TestCase {
 
 class ModelStub extends PhilipBrown\CapsuleCRM\Model {
 
-  protected $fillable = ['name'];
+  protected $fillable = ['name', 'email'];
 
   public function __construct(Connection $connection, $attributes = [])
   {
