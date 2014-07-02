@@ -139,7 +139,7 @@ abstract class Model {
   {
     if($this->isFillable($key))
     {
-      return $this->attributes[$key] = $value;
+      return $this->setAttribute($key, $value);
     }
 
     throw new Exception("{$key} is not a valid property");
