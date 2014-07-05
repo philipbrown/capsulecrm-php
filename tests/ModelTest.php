@@ -49,9 +49,7 @@ class ModelStub extends PhilipBrown\CapsuleCRM\Model {
 
   protected $fillable = ['name', 'email'];
 
-  protected $rules = [
-    'email' => 'required'
-  ];
+  protected $rules = ['email' => 'required'];
 
   public function __construct(Connection $connection, $attributes = [])
   {
