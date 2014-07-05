@@ -30,11 +30,28 @@ class ModelTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals('modelstubs', $this->model->base()->lowercase()->plural());
   }
 
+  public function testValidatingFailsWithMissingRequiredEmail()
+  {
+    $this->assertFalse($this->model->validate());
+  }
+
+  public function testValidatingPassesWithRequiredEmail()
+  {
+    $this->model->email = 'phil@ipbrown.com';
+    $this->assertTrue($this->model->validate());
+  }
+
 }
 
 class ModelStub extends PhilipBrown\CapsuleCRM\Model {
 
+  use PhilipBrown\CapsuleCRM\Validating;
+
   protected $fillable = ['name', 'email'];
+
+  protected $rules = [
+    'email' => 'required'
+  ];
 
   public function __construct(Connection $connection, $attributes = [])
   {
