@@ -21,6 +21,7 @@
         "siriusphp/validation": "1.2.1"
     },
     "require-dev": {
-        "phpunit/phpunit": "4.0.*"
+        "phpunit/phpunit": "4.0.*",
+        "mockery/mockery": "~0.9"
     }
 }
