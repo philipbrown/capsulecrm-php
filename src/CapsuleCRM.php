@@ -20,4 +20,14 @@ class CapsuleCRM {
     $this->connection = $connection;
   }
 
+  /**
+   * Return a new Party model
+   *
+   * @return PhilipBrown\CapsuleCRM\Party
+   */
+  public function party()
+  {
+    return new Party($this->connection);
+  }
+
 }

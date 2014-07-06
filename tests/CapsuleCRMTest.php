@@ -19,4 +19,9 @@ class CapsuleCRMTest extends PHPUnit_Framework_TestCase {
     $c = new PhilipBrown\CapsuleCRM\CapsuleCRM('');
   }
 
+  public function testCreateNewPartyModel()
+  {
+    $this->assertInstanceOf('PhilipBrown\CapsuleCRM\Party', $this->capsule->party());
+  }
+
 }
