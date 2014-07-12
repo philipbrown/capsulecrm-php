@@ -3,6 +3,15 @@
 class Party extends Model {
 
   /**
+   * The model's queryable options
+   *
+   * @var array
+   */
+  protected $queryableOptions = [
+    'plural' => 'party'
+  ];
+
+  /**
    * Create a new instance of the Party model
    *
    * @param PhilipBrown\CapsuleCRM\Connection $connection

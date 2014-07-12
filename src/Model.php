@@ -27,6 +27,20 @@ abstract class Model {
   protected $fillable = [];
 
   /**
+   * The Base meta instance
+   *
+   * @var PhilipBrown\CapsuleCRM\Meta\Base
+   */
+  protected $base;
+
+  /**
+   * The model's querable options
+   *
+   * @var array
+   */
+  protected $queryableOptions = [];
+
+  /**
    * Inject the Connection dependency
    *
    * @param PhilipBrown\CapsuleCRM\Connection $connection
@@ -109,7 +123,19 @@ abstract class Model {
    */
   public function base()
   {
-    return new Base($this);
+    if($this->base) return $this->base;
+
+    return $this->base = new Base($this);
+  }
+
+  /**
+   * Return the queryable options
+   *
+   * @return array
+   */
+  public function getQueryableOptions()
+  {
+    return $this->queryableOptions;
   }
 
   /**

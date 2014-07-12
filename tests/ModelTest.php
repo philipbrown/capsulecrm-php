@@ -1,12 +1,14 @@
 <?php
 
-use PhilipBrown\CapsuleCRM\Connection;
+use Mockery as m;
 
 class ModelTest extends PHPUnit_Framework_TestCase {
 
   public function setUp()
   {
-    $this->model = new ModelStub(new Connection('', ''), ['name' => 'Philip Brown']);
+    $connection = m::mock('PhilipBrown\CapsuleCRM\Connection');
+
+    $this->model = new ModelStub($connection, ['name' => 'Philip Brown']);
   }
 
   public function testConnectionMethodHasConnection()
