@@ -1,5 +1,5 @@
 /vendor
-configuration.php
+/configuration.php
 composer.phar
 composer.lock
 .DS_Store
