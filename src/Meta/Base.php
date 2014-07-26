@@ -15,7 +15,7 @@ class Base {
   /**
    * The class to inspect
    *
-   * @param PhilipBrown\CapsuleCRM\model $model
+   * @param PhilipBrown\CapsuleCRM\Model $model
    * @return void
    */
   public function __construct(Model $model)
@@ -26,7 +26,7 @@ class Base {
   /**
    * Convert the name to lowercase
    *
-   * @return PhilipBrown\CapsuleCRM\Meta\ClassName
+   * @return PhilipBrown\CapsuleCRM\Meta\Name
    */
   public function lowercase()
   {
@@ -36,7 +36,7 @@ class Base {
   /**
    * Convert the name to uppercase
    *
-   * @return PhilipBrown\CapsuleCRM\Meta\ClassName
+   * @return PhilipBrown\CapsuleCRM\Meta\Name
    */
   public function uppercase()
   {
@@ -46,7 +46,7 @@ class Base {
   /**
    * Convert the name to plural
    *
-   * @return PhilipBrown\CapsuleCRM\Meta\ClassName
+   * @return PhilipBrown\CapsuleCRM\Meta\Name
    */
   public function plural()
   {
@@ -56,7 +56,7 @@ class Base {
   /**
    * Convert the name to singular
    *
-   * @return PhilipBrown\CapsuleCRM\Meta\ClassName
+   * @return PhilipBrown\CapsuleCRM\Meta\Name
    */
   public function singular()
   {
