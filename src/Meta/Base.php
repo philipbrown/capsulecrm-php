@@ -30,7 +30,7 @@ class Base {
    */
   public function lowercase()
   {
-    return new Name(strtolower($this->reflection->getShortName()));
+    return $this->getNameInstance()->lowercase();
   }
 
   /**
@@ -40,7 +40,7 @@ class Base {
    */
   public function uppercase()
   {
-    return new Name(strtoupper($this->reflection->getShortName()));
+    return $this->getNameInstance()->uppercase();
   }
 
   /**
@@ -50,7 +50,7 @@ class Base {
    */
   public function plural()
   {
-    return new Name(Pluralizer::plural($this->reflection->getShortName()));
+    return $this->getNameInstance()->plural();
   }
 
   /**
@@ -60,7 +60,18 @@ class Base {
    */
   public function singular()
   {
-    return new Name(Pluralizer::singular($this->reflection->getShortName()));
+    return $this->getNameInstance()->singular();
   }
+
+  /**
+   * Create new Name instance
+   *
+   * @return PhilipBrown\CapsuleCRM\Meta\Name
+   */
+  protected function getNameInstance()
+  {
+    return new Name($this->reflection->getShortName());
+  }
+
 
 }
