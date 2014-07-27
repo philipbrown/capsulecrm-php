@@ -1,11 +1,13 @@
 <?php
 
+use PhilipBrown\CapsuleCRM\Validating;
 use PhilipBrown\CapsuleCRM\Connection;
+use PhilipBrown\CapsuleCRM\Querying\Findable;
 
 class ModelStub extends PhilipBrown\CapsuleCRM\Model {
 
-  use PhilipBrown\CapsuleCRM\Querying\Configuration;
-  use PhilipBrown\CapsuleCRM\Validating;
+  use Findable;
+  use Validating;
 
   protected $fillable = ['name', 'email'];
   protected $rules = ['email' => 'required'];
