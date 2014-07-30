@@ -8,7 +8,7 @@ trait FindAll {
    * @param array $params
    * @return array
    */
-  public function all($params = [])
+  public function all(array $params = [])
   {
     $endpoint = '/api/'.$this->queryableOptions()->plural();
 
