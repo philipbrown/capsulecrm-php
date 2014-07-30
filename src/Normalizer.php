@@ -21,11 +21,28 @@ class Normalizer {
    *
    * @param PhilipBrown\CapsuleCRM\Model $model
    * @param array $options
+   * @return void
    */
-  public function __construct(Model $model, array $options)
+  public function __construct(Model $model, array $options = [])
   {
     $this->model = $model;
     $this->options = $options;
   }
+
+  /**
+   * Normalize a single model
+   *
+   * @param array $attributes
+   * @return PhilipBrown\CapsuleCRM\Model
+   */
+  public function model(array $attributes){}
+
+  /**
+   * Normalize a collection of models
+   *
+   * @param array $attributes
+   * @return Illuminate\Support\Collection
+   */
+  public function collection(array $attributes){}
 
 }
