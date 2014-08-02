@@ -43,7 +43,7 @@ class NormalizerTest extends PHPUnit_Framework_TestCase {
    */
   public function testCollectionMethodRequiresAttributesArray()
   {
-    $this->normalizer->model();
+    $this->normalizer->collection();
   }
 
 }
