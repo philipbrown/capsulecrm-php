@@ -1,6 +1,8 @@
 <?php
 
 use Mockery as m;
+use PhilipBrown\CapsuleCRM\Model;
+use PhilipBrown\CapsuleCRM\Connection;
 
 class ModelTest extends PHPUnit_Framework_TestCase {
 
@@ -27,20 +29,17 @@ class ModelTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals('phil@ipbrown.com', $this->model->email);
   }
 
-  public function testGetSingularEntityName()
-  {
-    $this->assertEquals('modelstubs', $this->model->base()->lowercase()->plural());
-  }
+}
 
-  public function testValidatingFailsWithMissingRequiredEmail()
-  {
-    $this->assertFalse($this->model->validate());
-  }
+class ModelStub extends Model {
 
-  public function testValidatingPassesWithRequiredEmail()
+  protected $fillable = ['name', 'email'];
+
+  public function __construct(Connection $connection, $attributes = [])
   {
-    $this->model->email = 'phil@ipbrown.com';
-    $this->assertTrue($this->model->validate());
+    parent::__construct($connection);
+
+    $this->fill($attributes);
   }
 
 }

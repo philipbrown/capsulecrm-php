@@ -1,6 +1,9 @@
 <?php
 
 use Mockery as m;
+use PhilipBrown\CapsuleCRM\Model;
+use PhilipBrown\CapsuleCRM\Connection;
+use PhilipBrown\CapsuleCRM\Querying\Findable;
 
 class QueryingTest extends PHPUnit_Framework_TestCase {
 
@@ -8,12 +11,12 @@ class QueryingTest extends PHPUnit_Framework_TestCase {
   {
     $this->connection = m::mock('PhilipBrown\CapsuleCRM\Connection');
     $this->message = m::mock('Guzzle\Http\Message\Response');
-    $this->model = new ModelStub($this->connection);
+    $this->model = new QueryModelStub($this->connection);
   }
 
   public function testTheSingularQueryableName()
   {
-    $this->assertEquals('modelstub', $this->model->queryableOptions()->singular());
+    $this->assertEquals('querymodelstub', $this->model->queryableOptions()->singular());
   }
 
   public function testThePluralQueryableName()
@@ -21,28 +24,19 @@ class QueryingTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals('the_plural_name', $this->model->queryableOptions()->plural());
   }
 
-  public function testFindOneReturnsOneEntity()
+}
+
+class QueryModelStub extends Model {
+
+  use Findable;
+
+  protected $queryableOptions = ['plural' => 'the_plural_name'];
+
+  public function __construct(Connection $connection, $attributes = [])
   {
-    $stub = file_get_contents(dirname(__FILE__).'/stubs/stub.json');
-    $this->message->shouldReceive('json')->andReturn(json_decode($stub, true));
-    $this->connection->shouldReceive('get')->andReturn($this->message);
+    parent::__construct($connection);
 
-    $response = $this->model->find(1);
-
-    $this->assertTrue(isset($response['stub']));
-  }
-
-  public function testFindAllReturnsAllEntities()
-  {
-    $stub = file_get_contents(dirname(__FILE__).'/stubs/stubs.json');
-    $this->message->shouldReceive('json')->andReturn(json_decode($stub, true));
-    $this->connection->shouldReceive('get')->andReturn($this->message);
-
-    $response = $this->model->all();
-
-    $this->assertTrue(isset($response['stubs']));
+    $this->fill($attributes);
   }
 
 }
-
-

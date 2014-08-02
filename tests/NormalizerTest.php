@@ -1,13 +1,16 @@
 <?php
 
 use Mockery as m;
+use PhilipBrown\CapsuleCRM\Model;
+use PhilipBrown\CapsuleCRM\Connection;
 use PhilipBrown\CapsuleCRM\Normalizer;
 
 class NormalizerTest extends PHPUnit_Framework_TestCase {
 
   public function setUp()
   {
-    $this->model = new ModelStub(m::mock('PhilipBrown\CapsuleCRM\Connection'));
+    $this->connection = m::mock('PhilipBrown\CapsuleCRM\Connection');
+    $this->model = new NormalizeModelStub($this->connection);
     $this->normalizer = new Normalizer($this->model);
   }
 
@@ -41,6 +44,17 @@ class NormalizerTest extends PHPUnit_Framework_TestCase {
   public function testCollectionMethodRequiresAttributesArray()
   {
     $this->normalizer->model();
+  }
+
+}
+
+class NormalizeModelStub extends Model {
+
+  public function __construct(Connection $connection, $attributes = [])
+  {
+    parent::__construct($connection);
+
+    $this->fill($attributes);
   }
 
 }
