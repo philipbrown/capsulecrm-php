@@ -13,12 +13,12 @@ class ModelTest extends PHPUnit_Framework_TestCase {
     $this->model = new ModelStub($connection, ['name' => 'Philip Brown']);
   }
 
-  public function testConnectionMethodHasConnection()
+  public function testConnectionMethodReturnsConnection()
   {
     $this->assertInstanceOf('PhilipBrown\CapsuleCRM\Connection', $this->model->connection());
   }
 
-  public function testSettingAnArrayOfAttributes()
+  public function testInjectingAnArrayOfAttributes()
   {
     $this->assertEquals('Philip Brown', $this->model->name);
   }
