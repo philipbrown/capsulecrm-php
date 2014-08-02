@@ -1,6 +1,11 @@
 <?php namespace PhilipBrown\CapsuleCRM;
 
+use PhilipBrown\CapsuleCRM\Querying\Findable;
+
 class Party extends Model {
+
+  use Findable;
+  use Serializable;
 
   /**
    * The model's queryable options
@@ -9,6 +14,15 @@ class Party extends Model {
    */
   protected $queryableOptions = [
     'plural' => 'party'
+  ];
+
+  /**
+   * The model's serializble config
+   *
+   * @var array
+   */
+  protected $serializableConfig = [
+    'root' => ['person', 'organisation']
   ];
 
   /**

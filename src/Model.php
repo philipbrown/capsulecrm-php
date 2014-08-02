@@ -41,6 +41,13 @@ abstract class Model {
   protected $queryableOptions = [];
 
   /**
+   * The model's serializble config
+   *
+   * @var array
+   */
+  protected $serializableConfig = [];
+
+  /**
    * Inject the Connection dependency
    *
    * @param PhilipBrown\CapsuleCRM\Connection $connection
