@@ -26,6 +26,16 @@ class Party extends Model {
   ];
 
   /**
+   * The model's child classes
+   *
+   * @return array
+   */
+  public function childClasses()
+  {
+    return ['person', 'organisation'];
+  }
+
+  /**
    * Create a new instance of the Party model
    *
    * @param PhilipBrown\CapsuleCRM\Connection $connection

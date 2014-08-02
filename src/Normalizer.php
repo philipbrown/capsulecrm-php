@@ -1,5 +1,7 @@
 <?php namespace PhilipBrown\CapsuleCRM;
 
+use Illuminate\Support\Collection;
+
 class Normalizer {
 
   /**
@@ -22,6 +24,13 @@ class Normalizer {
    * @var array|string
    */
   protected $root;
+
+  /**
+   * The collection root
+   *
+   * @var string
+   */
+  protected $collection_root;
 
   /**
    * Create a new Normalizer instance
@@ -56,7 +65,13 @@ class Normalizer {
    * @param array $attributes
    * @return Illuminate\Support\Collection
    */
-  public function collection(array $attributes){}
+  public function collection(array $attributes)
+  {
+    if($this->hasSubclasses())
+    {
+      return $this->normalizeSubclassCollection($attributes);
+    }
+  }
 
   /**
    * Get the root of the entity
@@ -79,6 +94,26 @@ class Normalizer {
   }
 
   /**
+   * Get the collection root of the entity
+   *
+   * @return string
+   */
+  protected function collectionRoot()
+  {
+    if($this->collection_root)
+    {
+      return $this->collection_root;
+    }
+
+    if(isset($options['collection_root']))
+    {
+      return $this->collection_root = $options['collection_root'];
+    }
+
+    return $this->collection_root = $this->model->serializableOptions()['collection_root'];
+  }
+
+  /**
    * Normalize a subclass
    *
    * @param array $attributes
@@ -91,6 +126,38 @@ class Normalizer {
     $key = key($attributes);
 
     return $this->createNewModelInstance($key, $attributes[$key]);
+  }
+
+  /**
+   * Normalize a subclass collection
+   *
+   * @param array $attributes
+   * @return Illuminate\Support\Collection
+   */
+  protected function normalizeSubclassCollection($attributes)
+  {
+    $collection = new Collection;
+
+    foreach($attributes[(string)$this->collectionRoot()] as $key => $value)
+    {
+      if(in_array($key, $this->model->childClasses()))
+      {
+        if($this->isAssociativeArray($value))
+        {
+          $collection[] = $this->createNewModelInstance($key, $value);
+        }
+
+        else
+        {
+          foreach($value as $attributes)
+          {
+            $collection[] = $this->createNewModelInstance($key, $attributes);
+          }
+        }
+      }
+    }
+
+    return $collection;
   }
 
   /**
@@ -119,6 +186,17 @@ class Normalizer {
   protected function hasSubclasses()
   {
     return is_array($this->root());
+  }
+
+  /**
+   * Check to see if the array is associative
+   *
+   * @param array $array
+   * @return bool
+   */
+  protected function isAssociativeArray($array)
+  {
+    return (bool) count(array_filter(array_keys($array), 'is_string'));
   }
 
 }
