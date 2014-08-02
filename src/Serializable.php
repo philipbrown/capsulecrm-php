@@ -7,10 +7,7 @@ trait Serializable {
    *
    * @var array
    */
-  protected $serializableOptions = [
-    'include_root'        => true,
-    'additional_methods'  => []
-  ];
+  protected $serializableOptions;
 
   /**
    * Return the serializable options
@@ -19,7 +16,22 @@ trait Serializable {
    */
   public function serializableOptions()
   {
+    $this->setSerializableOptionsArray();
+
     return array_merge($this->serializableOptions, $this->serializableConfig);
+  }
+
+  /**
+   * Set the serializable options array
+   *
+   * @return void
+   */
+  private function setSerializableOptionsArray()
+  {
+    $this->serializableOptions = [
+      'root' => $this->base()->lowercase()->singular(),
+      'collection_root' => $this->base()->lowercase()->plural()
+    ];
   }
 
 }
