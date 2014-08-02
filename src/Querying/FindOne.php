@@ -6,7 +6,7 @@ trait FindOne {
    * Find a single entity by it's id
    *
    * @param int $id
-   * @return PhilipBrown\CapsuleCRM\Entity
+   * @return array
    */
   public function find($id)
   {
