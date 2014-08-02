@@ -1,5 +1,7 @@
 <?php namespace PhilipBrown\CapsuleCRM\Querying;
 
+use PhilipBrown\CapsuleCRM\Normalizer;
+
 trait FindOne {
 
   /**
@@ -12,9 +14,11 @@ trait FindOne {
   {
     $endpoint = '/api/'.$this->queryableOptions()->singular().'/'.$id;
 
-    $response = $this->connection->get($endpoint);
+    $response = $this->connection->get($endpoint)->json();
 
-    return $response->json();
+    $normalizer = new Normalizer($this);
+
+    return $normalizer->model($response);
   }
 
 }

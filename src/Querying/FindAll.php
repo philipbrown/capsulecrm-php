@@ -1,5 +1,7 @@
 <?php namespace PhilipBrown\CapsuleCRM\Querying;
 
+use PhilipBrown\CapsuleCRM\Normalizer;
+
 trait FindAll {
 
   /**
@@ -12,9 +14,11 @@ trait FindAll {
   {
     $endpoint = '/api/'.$this->queryableOptions()->plural();
 
-    $response = $this->connection->get($endpoint, $params);
+    $response = $this->connection->get($endpoint, $params)->json();
 
-    return $response->json();
+    $normalizer = new Normalizer($this);
+
+    return $normalizer->collection($response);
   }
 
 }
