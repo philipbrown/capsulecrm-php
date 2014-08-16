@@ -41,7 +41,7 @@ abstract class Model {
   protected $queryableOptions = [];
 
   /**
-   * The model's serializble config
+   * The model's serializable config
    *
    * @var array
    */
