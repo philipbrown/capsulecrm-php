@@ -7,6 +7,9 @@ use PhilipBrown\CapsuleCRM\Validating;
 
 class ValidateModelTest extends PHPUnit_Framework_TestCase {
 
+  /** @var PhilipBrown\CapsuleCRM\Model */
+  private $model;
+
   public function setUp()
   {
     $connection = m::mock('PhilipBrown\CapsuleCRM\Connection');
@@ -14,12 +17,14 @@ class ValidateModelTest extends PHPUnit_Framework_TestCase {
     $this->model = new ValidateModelStub($connection);
   }
 
-  public function testValidatingFailsWithMissingRequiredEmail()
+  /** @test */
+  public function should_fail_validation()
   {
     $this->assertFalse($this->model->validate());
   }
 
-  public function testValidatingPassesWithRequiredEmail()
+  /** @test */
+  public function should_pass_validation()
   {
     $this->model->email = 'phil@ipbrown.com';
     $this->assertTrue($this->model->validate());

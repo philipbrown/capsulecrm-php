@@ -4,32 +4,40 @@ use PhilipBrown\CapsuleCRM\Meta\Name;
 
 class MetaNameTest extends PHPUnit_Framework_TestCase {
 
+  /** @test PhilipBrown\CapsuleCRM\Meta\Name */
+  private $name;
+
   public function setUp()
   {
     $this->name = new Name('Person');
   }
 
-  public function testNameToLowercase()
+  /** @test */
+  public function should_convert_to_lowercase()
   {
     $this->assertEquals('person', $this->name->lowercase());
   }
 
-  public function testNameToUpperCase()
+  /** @test */
+  public function should_convert_to_uppercase()
   {
     $this->assertEquals('PERSON', $this->name->uppercase());
   }
 
-  public function testNameToPlural()
+  /** @test */
+  public function should_convert_plural()
   {
     $this->assertEquals('People', $this->name->plural());
   }
 
-  public function testNameToSingular()
+  /** @test */
+  public function should_convert_to_singular()
   {
     $this->assertEquals('Person', $this->name->singular());
   }
 
-  public function testChainedModifiers()
+  /** @test */
+  public function modifiers_should_be_chainable()
   {
     $this->assertEquals('people', $this->name->lowercase()->plural());
   }

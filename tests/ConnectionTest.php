@@ -2,9 +2,11 @@
 
 class ConnectionTest extends PHPUnit_Framework_TestCase {
 
-  public function testGetClient()
+  /** @test */
+  public function should_get_client()
   {
     $c = new PhilipBrown\CapsuleCRM\Connection('', '');
+
     $this->assertInstanceOf('GuzzleHttp\Client', $c->client());
   }
 

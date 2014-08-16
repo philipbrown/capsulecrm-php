@@ -6,6 +6,9 @@ use PhilipBrown\CapsuleCRM\Connection;
 
 class ModelTest extends PHPUnit_Framework_TestCase {
 
+  /** @test PhilipBrown\CapsuleCRM\Model */
+  private $model;
+
   public function setUp()
   {
     $connection = m::mock('PhilipBrown\CapsuleCRM\Connection');
@@ -13,17 +16,20 @@ class ModelTest extends PHPUnit_Framework_TestCase {
     $this->model = new ModelStub($connection, ['name' => 'Philip Brown']);
   }
 
-  public function testConnectionMethodReturnsConnection()
+  /** @test */
+  public function should_return_connection()
   {
     $this->assertInstanceOf('PhilipBrown\CapsuleCRM\Connection', $this->model->connection());
   }
 
-  public function testInjectingAnArrayOfAttributes()
+  /** @test */
+  public function should_have_access_to_injected_attributes()
   {
     $this->assertEquals('Philip Brown', $this->model->name);
   }
 
-  public function testSettingAProperty()
+  /** @test */
+  public function should_set_property()
   {
     $this->model->email = 'phil@ipbrown.com';
     $this->assertEquals('phil@ipbrown.com', $this->model->email);

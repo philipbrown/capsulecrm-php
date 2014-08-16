@@ -1,25 +1,30 @@
 <?php
 
 use Mockery as m;
+use PhilipBrown\CapsuleCRM\CapsuleCRM;
 
 class CapsuleCRMTest extends PHPUnit_Framework_TestCase {
+
+  /** @var PhilipBrown\CapsuleCRM\CapsuleCRM */
+  private $capsule;
 
   public function setUp()
   {
     $connection = m::mock('PhilipBrown\CapsuleCRM\Connection');
 
-    $this->capsule = new PhilipBrown\CapsuleCRM\CapsuleCRM($connection);
+    $this->capsule = new CapsuleCRM($connection);
   }
 
-  /**
-   * @expectedException Exception
-   */
-  public function testCapsuleCRMRequiresConnection()
+  /** @test */
+  public function should_require_connection()
   {
+    $this->setExpectedException('Exception');
+
     $c = new PhilipBrown\CapsuleCRM\CapsuleCRM('');
   }
 
-  public function testCreateNewPartyModel()
+  /** @test */
+  public function should_create_party()
   {
     $this->assertInstanceOf('PhilipBrown\CapsuleCRM\Party', $this->capsule->party());
   }

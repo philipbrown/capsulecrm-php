@@ -7,6 +7,15 @@ use PhilipBrown\CapsuleCRM\Querying\Findable;
 
 class QueryingTest extends PHPUnit_Framework_TestCase {
 
+  /** @var PhilipBrown\CapsuleCRM\Connection */
+  private $connection;
+
+  /** @var Guzzle\Http\Message\Response */
+  private $message;
+
+  /** @var PhilipBrown\CapsuleCRM\Model */
+  private $model;
+
   public function setUp()
   {
     $this->connection = m::mock('PhilipBrown\CapsuleCRM\Connection');
@@ -14,12 +23,14 @@ class QueryingTest extends PHPUnit_Framework_TestCase {
     $this->model = new QueryModelStub($this->connection);
   }
 
-  public function testTheSingularQueryableName()
+  /** @test */
+  public function should_get_singular_queryable_name()
   {
     $this->assertEquals('querymodelstub', $this->model->queryableOptions()->singular());
   }
 
-  public function testThePluralQueryableName()
+  /** @test */
+  public function should_get_plural_queryable_name()
   {
     $this->assertEquals('the_plural_name', $this->model->queryableOptions()->plural());
   }

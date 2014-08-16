@@ -1,25 +1,36 @@
 <?php
 
 use Mockery as m;
+use PhilipBrown\CapsuleCRM\Party;
 
 class PartyTest extends PHPUnit_Framework_TestCase {
+
+  /** @var PhilipBrown\CapsuleCRM\Connection */
+  private $connection;
+
+  /** @var PhilipBrown\CapsuleCRM\Party */
+  private $party;
+
+  /** @var Guzzle\Http\Message\Response */
+  private $message;
 
   public function setUp()
   {
     $this->connection = m::mock('PhilipBrown\CapsuleCRM\Connection');
-    $this->party = new PhilipBrown\CapsuleCRM\Party($this->connection);
+    $this->party = new Party($this->connection);
     $this->message = m::mock('Guzzle\Http\Message\Response');
   }
 
-  /**
-   * @expectedException Exception
-   */
-  public function testPartyRequiresConnection()
+  /** @test */
+  public function should_require_connection()
   {
+    $this->setExpectedException('Exception');
+
     $p = new PhilipBrown\CapsuleCRM\Party('');
   }
 
-  public function testFindPartyById()
+  /** @test */
+  public function find_party_by_id()
   {
     $response = file_get_contents(dirname(__FILE__).'/stubs/party.json');
     $this->message->shouldReceive('json')->andReturn(json_decode($response, true));
@@ -35,7 +46,8 @@ class PartyTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals('2011-12-14T10:45:46Z', $party->updated_on);
   }
 
-  public function testFindAllParties()
+  /** @test */
+  public function find_all_parties()
   {
     $response = file_get_contents(dirname(__FILE__).'/stubs/parties.json');
     $this->message->shouldReceive('json')->andReturn(json_decode($response, true));

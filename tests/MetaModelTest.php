@@ -6,6 +6,9 @@ use PhilipBrown\CapsuleCRM\Connection;
 
 class MetaModelTest extends PHPUnit_Framework_TestCase {
 
+  /** @var PhilipBrown\CapsuleCRM\Model */
+  private $model;
+
   public function setUp()
   {
     $connection = m::mock('PhilipBrown\CapsuleCRM\Connection');
@@ -13,19 +16,21 @@ class MetaModelTest extends PHPUnit_Framework_TestCase {
     $this->model = new MetaModelStub($connection);
   }
 
-  public function testGetPluralEntityName()
+  /** @test */
+  public function should_get_plural_entity_name()
   {
     $this->assertEquals('metamodelstubs', $this->model->base()->lowercase()->plural());
   }
 
-  public function testGetSingularEntityName()
+  /** @test */
+  public function should_get_singular_entity_name()
   {
     $this->assertEquals('metamodelstub', $this->model->base()->lowercase()->singular());
   }
 
 }
 
-class MetaModelStub extends PhilipBrown\CapsuleCRM\Model {
+class MetaModelStub extends Model {
 
   public function __construct(Connection $connection, $attributes = [])
   {
