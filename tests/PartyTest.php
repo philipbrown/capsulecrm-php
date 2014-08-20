@@ -36,7 +36,7 @@ class PartyTest extends PHPUnit_Framework_TestCase {
     $this->message->shouldReceive('json')->andReturn(json_decode($response, true));
     $this->connection->shouldReceive('get')->andReturn($this->message);
 
-    $party = $this->party->find(1);
+    $party = $this->party->find(100);
 
     $this->assertInstanceOf('PhilipBrown\CapsuleCRM\Person', $party);
     $this->assertEquals('100', $party->id);
