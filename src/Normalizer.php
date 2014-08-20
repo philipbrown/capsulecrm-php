@@ -85,9 +85,9 @@ class Normalizer {
       return $this->root;
     }
 
-    if(isset($options['root']))
+    if(isset($this->options['root']))
     {
-      return $this->root = $options['root'];
+      return $this->root = $this->options['root'];
     }
 
     return $this->root = $this->model->serializableOptions()['root'];
@@ -98,7 +98,7 @@ class Normalizer {
    *
    * @return string
    */
-  protected function collectionRoot()
+  private function collectionRoot()
   {
     if($this->collection_root)
     {
@@ -119,7 +119,7 @@ class Normalizer {
    * @param array $attributes
    * @return PhilipBrown\CapsuleCRM\Model
    */
-  protected function normalizeSubclass(array $attributes)
+  private function normalizeSubclass(array $attributes)
   {
     reset($attributes);
 
@@ -134,25 +134,22 @@ class Normalizer {
    * @param array $attributes
    * @return Illuminate\Support\Collection
    */
-  protected function normalizeSubclassCollection($attributes)
+  private function normalizeSubclassCollection($attributes)
   {
     $collection = new Collection;
 
     foreach($attributes[(string)$this->collectionRoot()] as $key => $value)
     {
-      if(in_array($key, $this->model->childClasses()))
+      if($this->isAssociativeArray($value))
       {
-        if($this->isAssociativeArray($value))
-        {
-          $collection[] = $this->createNewModelInstance($key, $value);
-        }
+        $collection[] = $this->createNewModelInstance($key, $value);
+      }
 
-        else
+      else
+      {
+        foreach($value as $attributes)
         {
-          foreach($value as $attributes)
-          {
-            $collection[] = $this->createNewModelInstance($key, $attributes);
-          }
+          $collection[] = $this->createNewModelInstance($key, $attributes);
         }
       }
     }
@@ -167,7 +164,7 @@ class Normalizer {
    * @param array $attributes
    * @return PhilipBrown\CapsuleCRM\Model
    */
-  protected function createNewModelInstance($name, array $attributes)
+  private function createNewModelInstance($name, array $attributes)
   {
     $class = ucfirst($name);
 
@@ -183,7 +180,7 @@ class Normalizer {
    *
    * @return bool
    */
-  protected function hasSubclasses()
+  private function hasSubclasses()
   {
     return is_array($this->root());
   }
@@ -194,7 +191,7 @@ class Normalizer {
    * @param array $array
    * @return bool
    */
-  protected function isAssociativeArray($array)
+  private function isAssociativeArray($array)
   {
     return (bool) count(array_filter(array_keys($array), 'is_string'));
   }
