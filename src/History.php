@@ -1,10 +1,12 @@
 <?php namespace PhilipBrown\CapsuleCRM;
 
-use PhilipBrown\CapsuleCRM\Querying\Findable;
+use PhilipBrown\CapsuleCRM\Querying\FindOne;
+use PhilipBrown\CapsuleCRM\Querying\Configuration;
 
-class Kase extends Model {
+class History extends Model {
 
-  use Findable;
+  use FindOne;
+  use Configuration;
   use Serializable;
 
   /**
@@ -14,13 +16,23 @@ class Kase extends Model {
    */
   protected $fillable = [
     'id',
-    'status',
-    'name',
-    'description',
-    'party_id',
-    'owner',
-    'created_on',
-    'updated_on'
+    'type',
+    'entry_date',
+    'creator',
+    'creator_name',
+    'subject',
+    'note',
+    'attachments'
+  ];
+
+  /**
+   * The model's serializble config
+   *
+   * @var array
+   */
+  protected $serializableConfig = [
+    'root' => 'historyItem',
+    'collection_root' => 'history'
   ];
 
   /**
@@ -29,7 +41,7 @@ class Kase extends Model {
    * @var array
    */
   protected $queryableOptions = [
-    'plural' => 'kase'
+    'plural' => 'history'
   ];
 
   /**

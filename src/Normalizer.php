@@ -140,7 +140,7 @@ class Normalizer {
    */
   private function normalizeModel(array $attributes)
   {
-    return $this->createNewModelInstance($this->root(), $attributes[(string) $this->root()]);
+    return $this->createNewModelInstance($this->model->base()->singular(), $attributes[(string) $this->root()]);
   }
 
   /**
