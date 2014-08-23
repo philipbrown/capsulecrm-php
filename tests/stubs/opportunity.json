@@ -1,0 +1,19 @@
+{
+  "opportunity": {
+    "id": "43",
+    "name": "Consulting",
+    "description": "Scope and design web site shopping cart",
+    "partyId": "2",
+    "currency": "GBP",
+    "value": "500.00",
+    "durationBasis": "DAY",
+    "duration": "10",
+    "expectedCloseDate": "2012-09-30T00:00:00Z",
+    "milestoneId": "2",
+    "milestone": "Bid",
+    "probability": "50",
+    "owner": "a.user",
+    "createdOn": "2011-09-30T00:00:00Z",
+    "updatedOn": "2011-09-30T00:00:00Z"
+  }
+}

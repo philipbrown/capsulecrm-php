@@ -21,7 +21,7 @@ class Organisation extends Party {
    * @param array $attributes;
    * @return void
    */
-  public function __construct(Connection $connection, array $attributes =[])
+  public function __construct(Connection $connection, array $attributes = [])
   {
     parent::__construct($connection);
 

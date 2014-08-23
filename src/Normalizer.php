@@ -57,6 +57,8 @@ class Normalizer {
     {
       return $this->normalizeSubclass($attributes);
     }
+
+    return $this->normalizeModel($attributes);
   }
 
   /**
@@ -71,6 +73,8 @@ class Normalizer {
     {
       return $this->normalizeSubclassCollection($attributes);
     }
+
+    return $this->normalizeCollection($attributes);
   }
 
   /**
@@ -126,6 +130,38 @@ class Normalizer {
     $key = key($attributes);
 
     return $this->createNewModelInstance($key, $attributes[$key]);
+  }
+
+  /**
+   * Normalize a single model
+   *
+   * @param array $attributes
+   * @return PhilipBrown\CapsuleCRM\Model
+   */
+  private function normalizeModel(array $attributes)
+  {
+    return $this->createNewModelInstance($this->root(), $attributes[(string) $this->root()]);
+  }
+
+  /**
+   * Normalize a collection
+   *
+   * @param array $attributes
+   * @return Illuminate\Support\Collection
+   */
+  private function normalizeCollection(array $attributes)
+  {
+    $collection = new Collection;
+
+    $type = (string) $this->collectionRoot();
+    $root = (string) $this->root();
+
+    foreach($attributes[$type] as $entity)
+    {
+      $collection[] = $this->createNewModelInstance($root, $entity);
+    }
+
+    return $collection;
   }
 
   /**
