@@ -33,6 +33,13 @@ class Normalizer {
   protected $collection_root;
 
   /**
+   * The attribute to assign
+   *
+   * @var string
+   */
+  protected $attribute_to_assign;
+
+  /**
    * Create a new Normalizer instance
    *
    * @param PhilipBrown\CapsuleCRM\Model $model
@@ -156,14 +163,17 @@ class Normalizer {
     $type = (string) $this->collectionRoot();
     $root = (string) $this->root();
 
-    if(! is_array($attributes[$type][$root][0]))
-    {
-      $attributes[$type][$root] = [$attributes[$type][$root]];
-    }
-
     foreach($attributes[$type][$root] as $entity)
     {
-      $collection[] = $this->createNewModelInstance($root, $entity);
+      if($this->attributeToAssign())
+      {
+        $collection[] = $this->createNewModelInstance($root, [$this->attributeToAssign() => $entity]);
+      }
+
+      else
+      {
+        $collection[] = $this->createNewModelInstance($root, $entity);
+      }
     }
 
     return $collection;
@@ -235,6 +245,24 @@ class Normalizer {
   private function isAssociativeArray($array)
   {
     return (bool) count(array_filter(array_keys($array), 'is_string'));
+  }
+
+  /**
+   * Return the attribute to assign
+   *
+   * @return string
+   */
+  private function attributeToAssign()
+  {
+    if($this->attribute_to_assign)
+    {
+      return $this->attribute_to_assign;
+    }
+
+    if(isset($this->model->serializableOptions()['attribute_to_assign']))
+    {
+      return $this->model->serializableOptions()['attribute_to_assign'];
+    }
   }
 
 }

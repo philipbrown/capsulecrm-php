@@ -60,7 +60,7 @@ class TaskTest extends PHPUnit_Framework_TestCase {
     $collection = $this->model->all();
 
     $this->assertInstanceOf('Illuminate\Support\Collection', $collection);
-    $this->assertTrue(count($collection) == 1);
+    $this->assertEquals(4, $collection->count());
     $this->assertInstanceOf('PhilipBrown\CapsuleCRM\Task', $collection[0]);
   }
 
