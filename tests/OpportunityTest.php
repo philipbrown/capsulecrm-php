@@ -9,7 +9,7 @@ class OpportunityTest extends PHPUnit_Framework_TestCase {
   private $connection;
 
   /** @var PhilipBrown\CapsuleCRM\Opportunity */
-  private $opportunity;
+  private $model;
 
   /** @var Guzzle\Http\Message\Response */
   private $message;
@@ -17,7 +17,7 @@ class OpportunityTest extends PHPUnit_Framework_TestCase {
   public function setUp()
   {
     $this->connection = m::mock('PhilipBrown\CapsuleCRM\Connection');
-    $this->opportunity = new Opportunity($this->connection);
+    $this->model = new Opportunity($this->connection);
     $this->message = m::mock('Guzzle\Http\Message\Response');
   }
 
@@ -26,7 +26,7 @@ class OpportunityTest extends PHPUnit_Framework_TestCase {
   {
     $this->setExpectedException('Exception');
 
-    $o = new Opportunity('');
+    $m = new Opportunity('');
   }
 
   /** @test */
@@ -36,7 +36,7 @@ class OpportunityTest extends PHPUnit_Framework_TestCase {
     $this->message->shouldReceive('json')->andReturn(json_decode($response, true));
     $this->connection->shouldReceive('get')->andReturn($this->message);
 
-    $opportunity = $this->opportunity->find(43);
+    $opportunity = $this->model->find(43);
 
     $this->assertInstanceOf('PhilipBrown\CapsuleCRM\Opportunity', $opportunity);
     $this->assertEquals('43', $opportunity->id);
@@ -63,7 +63,7 @@ class OpportunityTest extends PHPUnit_Framework_TestCase {
     $this->message->shouldReceive('json')->andReturn(json_decode($response, true));
     $this->connection->shouldReceive('get')->andReturn($this->message);
 
-    $collection = $this->opportunity->all();
+    $collection = $this->model->all();
 
     $this->assertInstanceOf('Illuminate\Support\Collection', $collection);
     $this->assertTrue(count($collection) == 1);

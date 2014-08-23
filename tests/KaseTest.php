@@ -9,7 +9,7 @@ class KaseTest extends PHPUnit_Framework_TestCase {
   private $connection;
 
   /** @var PhilipBrown\CapsuleCRM\Kase */
-  private $case;
+  private $model;
 
   /** @var Guzzle\Http\Message\Response */
   private $message;
@@ -17,7 +17,7 @@ class KaseTest extends PHPUnit_Framework_TestCase {
   public function setUp()
   {
     $this->connection = m::mock('PhilipBrown\CapsuleCRM\Connection');
-    $this->case = new Kase($this->connection);
+    $this->model = new Kase($this->connection);
     $this->message = m::mock('Guzzle\Http\Message\Response');
   }
 
@@ -26,7 +26,7 @@ class KaseTest extends PHPUnit_Framework_TestCase {
   {
     $this->setExpectedException('Exception');
 
-    $c = new Kase('');
+    $m = new Kase('');
   }
 
   /** @test */
@@ -36,7 +36,7 @@ class KaseTest extends PHPUnit_Framework_TestCase {
     $this->message->shouldReceive('json')->andReturn(json_decode($response, true));
     $this->connection->shouldReceive('get')->andReturn($this->message);
 
-    $case = $this->case->find(43);
+    $case = $this->model->find(43);
 
     $this->assertInstanceOf('PhilipBrown\CapsuleCRM\Kase', $case);
     $this->assertEquals('43', $case->id);
@@ -56,7 +56,7 @@ class KaseTest extends PHPUnit_Framework_TestCase {
     $this->message->shouldReceive('json')->andReturn(json_decode($response, true));
     $this->connection->shouldReceive('get')->andReturn($this->message);
 
-    $collection = $this->case->all();
+    $collection = $this->model->all();
 
     $this->assertInstanceOf('Illuminate\Support\Collection', $collection);
     $this->assertTrue(count($collection) == 1);

@@ -9,7 +9,7 @@ class PartyTest extends PHPUnit_Framework_TestCase {
   private $connection;
 
   /** @var PhilipBrown\CapsuleCRM\Party */
-  private $party;
+  private $model;
 
   /** @var Guzzle\Http\Message\Response */
   private $message;
@@ -17,7 +17,7 @@ class PartyTest extends PHPUnit_Framework_TestCase {
   public function setUp()
   {
     $this->connection = m::mock('PhilipBrown\CapsuleCRM\Connection');
-    $this->party = new Party($this->connection);
+    $this->model = new Party($this->connection);
     $this->message = m::mock('Guzzle\Http\Message\Response');
   }
 
@@ -26,7 +26,7 @@ class PartyTest extends PHPUnit_Framework_TestCase {
   {
     $this->setExpectedException('Exception');
 
-    $p = new Party('');
+    $m = new Party('');
   }
 
   /** @test */
@@ -36,7 +36,7 @@ class PartyTest extends PHPUnit_Framework_TestCase {
     $this->message->shouldReceive('json')->andReturn(json_decode($response, true));
     $this->connection->shouldReceive('get')->andReturn($this->message);
 
-    $party = $this->party->find(100);
+    $party = $this->model->find(100);
 
     $this->assertInstanceOf('PhilipBrown\CapsuleCRM\Person', $party);
     $this->assertEquals('100', $party->id);
@@ -53,7 +53,7 @@ class PartyTest extends PHPUnit_Framework_TestCase {
     $this->message->shouldReceive('json')->andReturn(json_decode($response, true));
     $this->connection->shouldReceive('get')->andReturn($this->message);
 
-    $collection = $this->party->all();
+    $collection = $this->model->all();
 
     $this->assertInstanceOf('Illuminate\Support\Collection', $collection);
     $this->assertTrue(count($collection) == 3);
