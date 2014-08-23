@@ -15,7 +15,7 @@ class Organisation extends Party {
   ];
 
   /**
-   * Create a new instance of the Party model
+   * Create a new instance of the model
    *
    * @param PhilipBrown\CapsuleCRM\Connection $connection
    * @param array $attributes;
