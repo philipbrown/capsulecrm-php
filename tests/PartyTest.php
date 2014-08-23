@@ -26,7 +26,7 @@ class PartyTest extends PHPUnit_Framework_TestCase {
   {
     $this->setExpectedException('Exception');
 
-    $p = new PhilipBrown\CapsuleCRM\Party('');
+    $p = new Party('');
   }
 
   /** @test */
