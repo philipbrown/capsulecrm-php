@@ -1,0 +1,12 @@
+{
+  "kase": {
+    "id": "43",
+    "status": "OPEN",
+    "name": "Consulting",
+    "description": "Scope and design web site shopping cart",
+    "partyId": "2",
+    "owner": "a.user",
+    "createdOn": "2011-04-16T13:59:58Z",
+    "updatedOn": "2011-05-11T16:54:23Z"
+  }
+}
