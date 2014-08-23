@@ -156,7 +156,12 @@ class Normalizer {
     $type = (string) $this->collectionRoot();
     $root = (string) $this->root();
 
-    foreach($attributes[$type] as $entity)
+    if(! is_array($attributes[$type][$root][0]))
+    {
+      $attributes[$type][$root] = [$attributes[$type][$root]];
+    }
+
+    foreach($attributes[$type][$root] as $entity)
     {
       $collection[] = $this->createNewModelInstance($root, $entity);
     }

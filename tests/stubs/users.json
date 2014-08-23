@@ -1,0 +1,23 @@
+{
+  "users": {
+    "user": [
+      {
+        "id": "2",
+        "username": "a.user",
+        "name": "Alfred User",
+        "currency": "GBP",
+        "timezone": "Europe/London",
+        "loggedIn": "true",
+        "partyId": "100"
+      },
+      {
+        "id": "3",
+        "username": "j.joe",
+        "name": "Jane Doe",
+        "currency": "GBP",
+        "timezone": "Europe/London",
+        "partyId": "101"
+      }
+    ]
+  }
+}
