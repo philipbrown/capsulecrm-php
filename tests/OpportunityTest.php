@@ -67,6 +67,7 @@ class OpportunityTest extends PHPUnit_Framework_TestCase {
 
     $this->assertInstanceOf('Illuminate\Support\Collection', $collection);
     $this->assertTrue(count($collection) == 1);
+    $this->assertInstanceOf('PhilipBrown\CapsuleCRM\Opportunity', $collection[0]);
   }
 
 }
