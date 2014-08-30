@@ -56,7 +56,7 @@ class PartyTest extends PHPUnit_Framework_TestCase {
     $collection = $this->model->all();
 
     $this->assertInstanceOf('Illuminate\Support\Collection', $collection);
-    $this->assertTrue(count($collection) == 3);
+    $this->assertEquals(3, $collection->count());
 
     $this->assertInstanceOf('PhilipBrown\CapsuleCRM\Person', $collection[0]);
     $this->assertEquals('100', $collection[0]->id);
