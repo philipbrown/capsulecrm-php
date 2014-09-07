@@ -58,4 +58,5 @@ trait Persistable {
      * @return Model
      */
     private function updateExistingEntityRequest(){}
+
 }

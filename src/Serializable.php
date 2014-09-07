@@ -10,6 +10,16 @@ trait Serializable {
   protected $serializableOptions;
 
   /**
+   * Serialize the current object to JSON
+   *
+   * @return string
+   */
+  public function toJson()
+  {
+    return $this->serializer()->serialize($this);
+  }
+
+  /**
    * Return the serializable options
    *
    * @return array
@@ -32,6 +42,16 @@ trait Serializable {
       'root' => $this->base()->lowercase()->singular(),
       'collection_root' => $this->base()->lowercase()->plural()
     ];
+  }
+
+  /**
+   * Create a new Serializer object
+   *
+   * @return Serializer
+   */
+  private function serializer()
+  {
+    return new Serializer($this->serializableOptions());
   }
 
 }
