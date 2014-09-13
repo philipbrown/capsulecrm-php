@@ -48,7 +48,7 @@ class Opportunity extends Model {
    */
   public function __construct(Connection $connection,  array $attributes = [])
   {
-    parent::__construct($connection);
+    $this->connection = $connection;
 
     $this->fill($attributes);
   }

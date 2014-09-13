@@ -43,7 +43,7 @@ class Party extends Model {
    */
   public function __construct(Connection $connection)
   {
-    parent::__construct($connection);
+    $this->connection = $connection;
   }
 
 }

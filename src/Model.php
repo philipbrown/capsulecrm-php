@@ -48,17 +48,6 @@ abstract class Model {
   protected $serializableConfig = [];
 
   /**
-   * Inject the Connection dependency
-   *
-   * @param PhilipBrown\CapsuleCRM\Connection $connection
-   * @return void
-   */
-  public function __construct(Connection $connection)
-  {
-    $this->connection = $connection;
-  }
-
-  /**
    * Get the connection instance
    *
    * @return PhilipBrown\CapsuleCRM\Connection

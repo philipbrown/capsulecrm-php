@@ -45,7 +45,7 @@ class QueryModelStub extends Model {
 
   public function __construct(Connection $connection, $attributes = [])
   {
-    parent::__construct($connection);
+    $this->connection = $connection;
 
     $this->fill($attributes);
   }
