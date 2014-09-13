@@ -22,7 +22,7 @@ trait Validating {
 
     $validator->add($this->rules);
 
-    if($validator->validate($this->attributes))
+    if($validator->validate($this->attributes()))
     {
       return true;
     }
