@@ -2,6 +2,8 @@
 
 class Organisation extends Party {
 
+  use Contactable;
+
   /**
    * The model's fillable attributes
    *
@@ -13,6 +15,16 @@ class Organisation extends Party {
     'about',
     'created_on',
     'updated_on'
+  ];
+
+  /**
+   * The model's serializble config
+   *
+   * @var array
+   */
+  protected $serializableConfig = [
+    'root' => 'organisation',
+    'additional_methods' => ['contacts']
   ];
 
   /**

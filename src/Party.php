@@ -22,7 +22,7 @@ class Party extends Model {
    * @var array
    */
   protected $serializableConfig = [
-    'root' => ['person', 'organisation']
+    'root' => ['person', 'organisation'],
   ];
 
   /**

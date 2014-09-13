@@ -2,6 +2,8 @@
 
 class Person extends Party {
 
+  use Contactable;
+
   /**
    * The model's fillable attributes
    *
@@ -20,6 +22,16 @@ class Person extends Party {
   ];
 
   /**
+   * The model's serializble config
+   *
+   * @var array
+   */
+  protected $serializableConfig = [
+    'collection_root' => 'parties',
+    'additional_methods' => ['contacts']
+  ];
+
+  /**
    * Create a new instance of the model
    *
    * @param PhilipBrown\CapsuleCRM\Connection $connection
@@ -31,6 +43,8 @@ class Person extends Party {
     $this->connection = $connection;
 
     $this->fill($attributes);
+
+    $this->contacts = new Contacts;
   }
 
 }

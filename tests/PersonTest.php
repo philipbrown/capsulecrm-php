@@ -1,7 +1,12 @@
 <?php
 
 use Mockery as m;
+use PhilipBrown\CapsuleCRM\Email;
+use PhilipBrown\CapsuleCRM\Phone;
 use PhilipBrown\CapsuleCRM\Person;
+use PhilipBrown\CapsuleCRM\Address;
+use PhilipBrown\CapsuleCRM\Website;
+use PhilipBrown\CapsuleCRM\Contacts;
 
 class PersonTest extends PHPUnit_Framework_TestCase
 {
@@ -25,9 +30,35 @@ class PersonTest extends PHPUnit_Framework_TestCase
             'about' => 'A comment here'
         ]);
 
+        $person->addContacts(
+            new Contacts([
+                'addresses' => [new Address([
+                    'type' => 'Office',
+                    'street' => '1600 Amphitheatre Parkway',
+                    'city' => 'Mountain View',
+                    'state' => 'CA',
+                    'zip' => '94043',
+                    'country' => 'United States'
+                ])],
+                'emails' => [new Email([
+                    'type' => 'Home',
+                    'email_address' => 'e.schmidt@google.com'
+                ])],
+                'phones' => [new Phone([
+                    'type' => 'Mobile',
+                    'phone_number' => '+1 888 555555'
+                ])],
+                'websites' => [new Website([
+                    'type' => 'work',
+                    'web_service' => 'URL',
+                    'web_address' => 'www.google.com'
+                ])]
+            ])
+        );
+
         $stub = json_decode(file_get_contents(dirname(__FILE__).'/stubs/post/person.json'), true);
-        unset($stub['person']['contacts']);
 
         $this->assertEquals(json_encode($stub), $person->toJson());
     }
 }
+

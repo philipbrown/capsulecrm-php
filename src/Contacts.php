@@ -88,10 +88,10 @@ class Contacts
     public function toJson()
     {
         $body = [
-            'addresses' => array_map(function($obj){ return $obj->toJson(); }, $this->addresses),
-            'emails'    => array_map(function($obj){ return $obj->toJson(); }, $this->emails),
-            'phones'    => array_map(function($obj){ return $obj->toJson(); }, $this->phones),
-            'websites'  => array_map(function($obj){ return $obj->toJson(); }, $this->websites),
+            'address'  => $this->map($this->addresses),
+            'email'    => $this->map($this->emails),
+            'phone'    => $this->map($this->phones),
+            'website'  => $this->map($this->websites),
         ];
 
         $body = array_filter($body, function ($item) {
@@ -99,6 +99,15 @@ class Contacts
         });
 
         return json_encode($body);
+    }
+
+    private function map(array $attributes)
+    {
+        if (count($attributes) == 1) {
+            return json_decode($attributes[0]->toJson());
+        }
+
+        return array_map(function($obj){ return json_decode($obj->toJson()); }, $attributes);
     }
 
     /**

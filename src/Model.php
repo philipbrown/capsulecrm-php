@@ -17,7 +17,7 @@ abstract class Model {
    *
    * @var array
    */
-  private $attributes = [];
+  protected $attributes = [];
 
   /**
    * The model's fillable attributes

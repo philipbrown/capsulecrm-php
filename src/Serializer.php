@@ -111,6 +111,14 @@ class Serializer
      */
     private function attributes()
     {
-        return $this->model->attributes();
+        $attributes = [];
+
+        foreach ($this->options['additional_methods'] as $method) {
+            $attributes = array_merge($attributes, [$method => json_decode($this->model->$method()->toJson())]);
+        }
+
+        $attributes = array_merge($attributes, $this->model->attributes());
+
+        return $attributes;
     }
 }

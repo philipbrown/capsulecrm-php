@@ -1,6 +1,8 @@
 <?php
 
 use Mockery as m;
+use PhilipBrown\CapsuleCRM\Address;
+use PhilipBrown\CapsuleCRM\Contacts;
 use PhilipBrown\CapsuleCRM\Organisation;
 
 class OrganisationTest extends PHPUnit_Framework_TestCase
@@ -21,8 +23,20 @@ class OrganisationTest extends PHPUnit_Framework_TestCase
             'about' => 'A comment here'
         ]);
 
+        $organisation->addContacts(
+            new Contacts([
+                'addresses' => [new Address([
+                    'type' => 'Office',
+                    'street' => '1600 Amphitheatre Parkway',
+                    'city' => 'Mountain View',
+                    'state' => 'CA',
+                    'zip' => '94043',
+                    'country' => 'United States'
+                ])]
+            ])
+        );
+
         $stub = json_decode(file_get_contents(dirname(__FILE__).'/stubs/post/organisation.json'), true);
-        unset($stub['organisation']['contacts']);
 
         $this->assertEquals(json_encode($stub), $organisation->toJson());
     }
