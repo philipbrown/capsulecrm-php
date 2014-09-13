@@ -17,7 +17,7 @@ abstract class Model {
    *
    * @var array
    */
-  protected $attributes = [];
+  private $attributes = [];
 
   /**
    * The model's fillable attributes
@@ -66,6 +66,16 @@ abstract class Model {
   public function connection()
   {
     return $this->connection;
+  }
+
+  /**
+   * Return the model attributes
+   *
+   * @param array
+   */
+  public function attributes()
+  {
+    return $this->attributes;
   }
 
   /**
