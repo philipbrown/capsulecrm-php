@@ -40,7 +40,7 @@ trait Persistable {
      *
      * @return bool
      */
-    private isExistingEntity()
+    private isPersisted()
     {
         return ! $this->isNewEntity();
     }
