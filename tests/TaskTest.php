@@ -64,4 +64,18 @@ class TaskTest extends PHPUnit_Framework_TestCase {
     $this->assertInstanceOf('PhilipBrown\CapsuleCRM\Task', $collection[0]);
   }
 
+  /** @test */
+  public function should_serialise_model()
+  {
+    $task = new Task($this->connection, [
+      'description' => 'Call customer',
+      'due_date_time' => '2012-04-21T15:00:00Z'
+    ]);
+
+    $stub = json_decode(file_get_contents(dirname(__FILE__).'/stubs/post/task.json'), true);
+
+    $this->assertEquals(json_encode($stub), $task->toJson());
+  }
+
 }
+

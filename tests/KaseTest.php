@@ -63,4 +63,21 @@ class KaseTest extends PHPUnit_Framework_TestCase {
     $this->assertInstanceOf('PhilipBrown\CapsuleCRM\Kase', $collection[0]);
   }
 
+  /** @test */
+  public function should_serialise_model()
+  {
+    $kase = new Kase($this->connection, [
+      'status' => 'OPEN',
+      'name' => 'Website design',
+      'description' => 'Design and create website',
+      'owner' => 'a.user'
+    ]);
+
+    $stub = json_decode(file_get_contents(dirname(__FILE__).'/stubs/post/kase.json'), true);
+
+    $this->assertEquals(json_encode($stub), $kase->toJson());
+  }
+
 }
+
+

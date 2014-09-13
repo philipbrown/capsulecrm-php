@@ -21,7 +21,8 @@ class Task extends Model {
     'owner',
     'party_id',
     'party_name',
-    'status'
+    'status',
+    'due_date_time'
   ];
 
   /**
