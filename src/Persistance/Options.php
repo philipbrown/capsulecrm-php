@@ -27,7 +27,7 @@ class Options
      */
     public function create()
     {
-        return $this->create = $this->model->base()->lowercase()->plural();
+        return $this->model->base()->lowercase()->plural();
     }
 
     /**
@@ -37,7 +37,7 @@ class Options
      */
     public function update()
     {
-        return $this->update = $this->model->base()->lowercase()->singular().'/'.$this->model->id;
+        return $this->model->base()->lowercase()->singular().'/'.$this->model->id;
     }
 
     /**
@@ -47,6 +47,6 @@ class Options
      */
     public function delete()
     {
-        return $this->delete = $this->model->base()->lowercase()->singular().'/'.$this->model->id;
+        return $this->model->base()->lowercase()->singular().'/'.$this->model->id;
     }
 }
