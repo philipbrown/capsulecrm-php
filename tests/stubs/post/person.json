@@ -1,0 +1,33 @@
+{
+  "person": {
+    "contacts": {
+      "address": {
+        "type": "Office",
+        "street": "1600 Amphitheatre Parkway",
+        "city": "Mountain View",
+        "state": "CA",
+        "zip": "94043",
+        "country": "United States"
+      },
+      "email": {
+        "type": "Home",
+        "emailAddress": "e.schmidt@google.com"
+      },
+      "phone": {
+        "type": "Mobile",
+        "phoneNumber": "+1 888 555555"
+      },
+      "website": {
+        "type": "work",
+        "webService": "URL",
+        "webAddress": "www.google.com"
+      }
+    },
+    "title": "Mr",
+    "firstName": "Eric",
+    "lastName": "Schmidt",
+    "jobTitle": "Chairman",
+    "organisationName": "Google Inc",
+    "about": "A comment here"
+  }
+}

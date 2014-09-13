@@ -1,0 +1,16 @@
+{
+  "organisation": {
+    "contacts": {
+      "address": {
+        "type": "Office",
+        "street": "1600 Amphitheatre Parkway",
+        "city": "Mountain View",
+        "state": "CA",
+        "zip": "94043",
+        "country": "United States"
+      }
+    },
+    "name": "Google Inc",
+    "about": "A comment here"
+  }
+}

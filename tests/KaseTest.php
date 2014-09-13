@@ -32,7 +32,7 @@ class KaseTest extends PHPUnit_Framework_TestCase {
   /** @test */
   public function find_case_by_id()
   {
-    $response = file_get_contents(dirname(__FILE__).'/stubs/kase.json');
+    $response = file_get_contents(dirname(__FILE__).'/stubs/get/kase.json');
     $this->message->shouldReceive('json')->andReturn(json_decode($response, true));
     $this->connection->shouldReceive('get')->andReturn($this->message);
 
@@ -52,7 +52,7 @@ class KaseTest extends PHPUnit_Framework_TestCase {
   /** @test */
   public function find_all_cases()
   {
-    $response = file_get_contents(dirname(__FILE__).'/stubs/kases.json');
+    $response = file_get_contents(dirname(__FILE__).'/stubs/get/kases.json');
     $this->message->shouldReceive('json')->andReturn(json_decode($response, true));
     $this->connection->shouldReceive('get')->andReturn($this->message);
 

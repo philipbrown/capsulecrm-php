@@ -9,8 +9,12 @@ class Person extends Party {
    */
   protected $fillable = [
     'id',
+    'title',
     'first_name',
     'last_name',
+    'job_title',
+    'organisation_name',
+    'about',
     'created_on',
     'updated_on'
   ];

@@ -32,7 +32,7 @@ class OpportunityTest extends PHPUnit_Framework_TestCase {
   /** @test */
   public function find_opportunity_by_id()
   {
-    $response = file_get_contents(dirname(__FILE__).'/stubs/opportunity.json');
+    $response = file_get_contents(dirname(__FILE__).'/stubs/get/opportunity.json');
     $this->message->shouldReceive('json')->andReturn(json_decode($response, true));
     $this->connection->shouldReceive('get')->andReturn($this->message);
 
@@ -59,7 +59,7 @@ class OpportunityTest extends PHPUnit_Framework_TestCase {
   /** @test */
   public function find_all_opportunities()
   {
-    $response = file_get_contents(dirname(__FILE__).'/stubs/opportunities.json');
+    $response = file_get_contents(dirname(__FILE__).'/stubs/get/opportunities.json');
     $this->message->shouldReceive('json')->andReturn(json_decode($response, true));
     $this->connection->shouldReceive('get')->andReturn($this->message);
 

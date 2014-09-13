@@ -24,7 +24,7 @@ class UserTest extends PHPUnit_Framework_TestCase {
   /** @test */
   public function find_all_users()
   {
-    $response = file_get_contents(dirname(__FILE__).'/stubs/users.json');
+    $response = file_get_contents(dirname(__FILE__).'/stubs/get/users.json');
     $this->message->shouldReceive('json')->andReturn(json_decode($response, true));
     $this->connection->shouldReceive('get')->andReturn($this->message);
 

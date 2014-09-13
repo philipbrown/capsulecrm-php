@@ -40,7 +40,8 @@ trait Serializable {
   {
     $this->serializableOptions = [
       'root' => $this->base()->lowercase()->singular(),
-      'collection_root' => $this->base()->lowercase()->plural()
+      'collection_root' => $this->base()->lowercase()->plural(),
+      'include_root' => true
     ];
   }
 
@@ -51,7 +52,9 @@ trait Serializable {
    */
   private function serializer()
   {
-    return new Serializer($this->serializableOptions());
+    $this->setSerializableOptionsArray();
+
+    return new Serializer($this->serializableOptions);
   }
 
 }

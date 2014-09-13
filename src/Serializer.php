@@ -10,7 +10,7 @@ class Serializer
     /**
      * @var Model
      */
-    public function $model;
+    public $model;
 
     /**
      * Create a new Serializer
@@ -47,7 +47,21 @@ class Serializer
      */
     private function includeRoot()
     {
-        return ! (isset($this->options['include_root'] && $this->options['include_root'] === false));
+        return $this->options['include_root'];
+    }
+
+    /**
+     * Return the root of the model
+     *
+     * @return string
+     */
+    private function root()
+    {
+        if (isset($this->options['root'])) {
+            return (string) $this->options['root'];
+        }
+
+        return (string) $this->model->base()->lowercase()->singular()->camelcase();
     }
 
     /**
@@ -55,7 +69,10 @@ class Serializer
      *
      * @return string
      */
-    private function serializeWithRoot(){}
+    private function serializeWithRoot()
+    {
+        return json_encode([$this->root() => $this->buildAttributesArray()]);
+    }
 
     /**
      * Serialize the model without the root
@@ -64,7 +81,7 @@ class Serializer
      */
     private function serializeWithoutRoot()
     {
-        return $this->buildAttributesArray();
+        return json_encode($this->buildAttributesArray());
     }
 
     /**
@@ -74,7 +91,7 @@ class Serializer
      */
     private function buildAttributesArray()
     {
-        return Helper::toCamelCase($this->cleanedAttributes);
+        return Helper::toCamelCase($this->cleanedAttributes());
     }
 
     /**

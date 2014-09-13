@@ -10,6 +10,7 @@ class Organisation extends Party {
   protected $fillable = [
     'id',
     'name',
+    'about',
     'created_on',
     'updated_on'
   ];

@@ -32,7 +32,7 @@ class PartyTest extends PHPUnit_Framework_TestCase {
   /** @test */
   public function find_party_by_id()
   {
-    $response = file_get_contents(dirname(__FILE__).'/stubs/party.json');
+    $response = file_get_contents(dirname(__FILE__).'/stubs/get/party.json');
     $this->message->shouldReceive('json')->andReturn(json_decode($response, true));
     $this->connection->shouldReceive('get')->andReturn($this->message);
 
@@ -49,7 +49,7 @@ class PartyTest extends PHPUnit_Framework_TestCase {
   /** @test */
   public function find_all_parties()
   {
-    $response = file_get_contents(dirname(__FILE__).'/stubs/parties.json');
+    $response = file_get_contents(dirname(__FILE__).'/stubs/get/parties.json');
     $this->message->shouldReceive('json')->andReturn(json_decode($response, true));
     $this->connection->shouldReceive('get')->andReturn($this->message);
 
