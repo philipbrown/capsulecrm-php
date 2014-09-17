@@ -101,6 +101,13 @@ class Contacts
         return json_encode($body);
     }
 
+    /**
+     * Map each item of the collection
+     * and serialise to JSON
+     *
+     * @param array $attributes
+     * @return array
+     */
     private function map(array $attributes)
     {
         if (count($attributes) == 1) {
