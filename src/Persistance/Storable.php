@@ -8,9 +8,9 @@ trait Storable
      * @param array $attributes
      * @return Model
      */
-    public function create(array $attributes)
+    public static function create(array $attributes)
     {
-        $model = new self($this->connection, $attributes);
+        $model = new static($this->connection, $attributes);
 
         $model->save();
 
