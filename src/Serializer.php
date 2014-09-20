@@ -117,8 +117,36 @@ class Serializer
             $attributes = array_merge($attributes, [$method => json_decode($this->model->$method()->toJson())]);
         }
 
+        if (array_key_exists('PhilipBrown\CapsuleCRM\Associations', class_uses($this->model))) {
+            foreach ($this->model->belongsToAssociations() as $name => $association) {
+                if ($association->serialize()) {
+                    $attributes = array_merge($attributes, [
+                        $association->serializableKey() => $this->belongsToValue($this->model, $name)
+                    ]);
+                }
+            }
+        }
+
         $attributes = array_merge($attributes, $this->model->attributes());
 
         return $attributes;
+    }
+
+    /**
+     * Get the id of the associated entity
+     *
+     * @param Model $model
+     * @param string $name
+     * @return string
+     */
+    private function belongsToValue(Model $model, $name)
+    {
+        $value = $model->{$name};
+
+        if (! is_null($value) && $value->id) {
+            return $value->id;
+        }
+
+        return $value;
     }
 }

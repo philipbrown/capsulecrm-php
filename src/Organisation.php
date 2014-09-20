@@ -1,8 +1,16 @@
 <?php namespace PhilipBrown\CapsuleCRM;
 
+use PhilipBrown\CapsuleCRM\Persistance\Persistable;
+
 class Organisation extends Party {
 
+  use Persistable;
+  use Validating;
   use Contactable;
+
+  protected $rules = [
+    'name' => 'required'
+  ];
 
   /**
    * The model's fillable attributes
@@ -38,7 +46,15 @@ class Organisation extends Party {
   {
     $this->connection = $connection;
 
+    $this->contacts = new Contacts;
+
     $this->fill($attributes);
+
+    $this->persistableConfig = [
+      'create' => function () { return "organisation"; },
+      'update' => function () { return "organisation/$this->id"; },
+      'delete' => function () { return "party/$this->id"; }
+    ];
   }
 
 }

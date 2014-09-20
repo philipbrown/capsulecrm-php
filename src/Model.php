@@ -20,6 +20,20 @@ abstract class Model {
   protected $attributes = [];
 
   /**
+   * The model's associations
+   *
+   * @var array
+   */
+  protected $associations = [];
+
+  /**
+   * The model's related entities
+   *
+   * @return array
+   */
+  protected $relations = [];
+
+  /**
    * The model's fillable attributes
    *
    * @var array
@@ -159,9 +173,12 @@ abstract class Model {
    */
   public function __get($key)
   {
-    if(isset($this->attributes[$key]))
-    {
+    if (isset($this->attributes[$key])) {
       return $this->attributes[$key];
+    }
+
+    if (isset($this->relations[$key])) {
+      return $this->relations[$key];
     }
   }
 
@@ -177,6 +194,10 @@ abstract class Model {
     if($this->isFillable($key))
     {
       return $this->setAttribute($key, $value);
+    }
+
+    if (isset($this->associations[$key])) {
+      $this->relations[$key] = $value;
     }
   }
 

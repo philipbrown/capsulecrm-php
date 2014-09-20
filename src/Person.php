@@ -4,6 +4,7 @@ use PhilipBrown\CapsuleCRM\Persistance\Persistable;
 
 class Person extends Party {
 
+  use Associations;
   use Persistable;
   use Contactable;
   use Validating;
@@ -64,6 +65,7 @@ class Person extends Party {
       'create' => function (){ return 'person'; },
       'delete' => function (){ return "party/$this->id"; }
     ];
-  }
 
+    $this->belongsTo('organisation');
+  }
 }
