@@ -48,6 +48,13 @@ abstract class Model {
   protected $serializableConfig = [];
 
   /**
+   * The model's persistable config
+   *
+   * @var array
+   */
+  protected $persistableConfig = [];
+
+  /**
    * Get the connection instance
    *
    * @return PhilipBrown\CapsuleCRM\Connection
@@ -156,8 +163,6 @@ abstract class Model {
     {
       return $this->attributes[$key];
     }
-
-    throw new Exception("{$key} is not a valid property");
   }
 
   /**
@@ -173,8 +178,6 @@ abstract class Model {
     {
       return $this->setAttribute($key, $value);
     }
-
-    throw new Exception("{$key} is not a valid property");
   }
 
 }

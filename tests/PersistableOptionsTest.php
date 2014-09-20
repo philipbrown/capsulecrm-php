@@ -11,7 +11,8 @@ class PersistableOptionsTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->options = new Options(new Person(m::mock('PhilipBrown\CapsuleCRM\Connection'), ['id' => 123]));
+        $person = new Person(m::mock('PhilipBrown\CapsuleCRM\Connection'), ['id' => 123]);
+        $this->options = new Options($person, []);
     }
 
     /** @test */

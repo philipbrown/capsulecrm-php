@@ -5,6 +5,13 @@ use Sirius\Validation\Validator;
 trait Validating {
 
   /**
+   * The model's validation rules
+   *
+   * @var array
+   */
+  protected $rules;
+
+  /**
    * The validation errors
    *
    * @var array

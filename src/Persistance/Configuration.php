@@ -9,6 +9,6 @@ trait Configuration
      */
     public function persistableConfig()
     {
-        return new Options($this);
+        return new Options($this, $this->persistableConfig);
     }
 }
