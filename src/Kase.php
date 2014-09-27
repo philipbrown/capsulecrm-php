@@ -1,11 +1,24 @@
 <?php namespace PhilipBrown\CapsuleCRM;
 
 use PhilipBrown\CapsuleCRM\Querying\Findable;
+use PhilipBrown\CapsuleCRM\Persistance\Persistable;
 
 class Kase extends Model {
 
+  use Validating;
   use Findable;
   use Serializable;
+  use Associations;
+  use Persistable;
+
+  /**
+   * The model's validation rules
+   *
+   * @param array
+   */
+  protected $rules = [
+    'name' => 'required'
+  ];
 
   /**
    * The model's fillable attributes
@@ -44,6 +57,13 @@ class Kase extends Model {
     $this->connection = $connection;
 
     $this->fill($attributes);
+
+    $this->persistableConfig = [
+      'create' => function ($this){ return 'party/'.$this->party->id.'/kase'; },
+    ];
+
+    $this->belongsTo('party');
+    $this->belongsTo('track');
   }
 
 }

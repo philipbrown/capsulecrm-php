@@ -44,7 +44,7 @@ class Organisation extends Party {
    */
   public function __construct(Connection $connection, array $attributes = [])
   {
-    $this->connection = $connection;
+    parent::__construct($connection);
 
     $this->contacts = new Contacts;
 

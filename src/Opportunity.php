@@ -1,11 +1,24 @@
 <?php namespace PhilipBrown\CapsuleCRM;
 
 use PhilipBrown\CapsuleCRM\Querying\Findable;
+use PhilipBrown\CapsuleCRM\Persistance\Persistable;
 
 class Opportunity extends Model {
 
   use Findable;
+  use Validating;
+  use Associations;
   use Serializable;
+  use Persistable;
+
+  /**
+   * The model's validation rules
+   *
+   * @param array
+   */
+  protected $rules = [
+    'name' => 'required'
+  ];
 
   /**
    * The model's fillable attributes
@@ -22,8 +35,8 @@ class Opportunity extends Model {
     'duration_basis',
     'duration',
     'expected_close_date',
-    'milestone_id',
     'milestone',
+    'milestone_id',
     'probability',
     'owner',
     'created_on',
@@ -51,6 +64,14 @@ class Opportunity extends Model {
     $this->connection = $connection;
 
     $this->fill($attributes);
+
+    $this->persistableConfig = [
+      'create' => function ($this){ return 'party/'.$this->party->id.'/opportunity'; },
+    ];
+
+    $this->belongsTo('party');
+    $this->belongsTo('milestone');
+    $this->belongsTo('track');
   }
 
 }

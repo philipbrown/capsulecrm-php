@@ -119,7 +119,7 @@ class Serializer
 
         if (array_key_exists('PhilipBrown\CapsuleCRM\Associations', class_uses($this->model))) {
             foreach ($this->model->belongsToAssociations() as $name => $association) {
-                if ($association->serialize()) {
+                if ($association->serialize() && $this->belongsToValue($this->model, $name)) {
                     $attributes = array_merge($attributes, [
                         $association->serializableKey() => $this->belongsToValue($this->model, $name)
                     ]);

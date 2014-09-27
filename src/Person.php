@@ -4,9 +4,10 @@ use PhilipBrown\CapsuleCRM\Persistance\Persistable;
 
 class Person extends Party {
 
+  use Validating;
   use Persistable;
   use Contactable;
-  use Validating;
+  use Associations;
 
   /**
    * The model's validation rules
