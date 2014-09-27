@@ -4,7 +4,6 @@ use PhilipBrown\CapsuleCRM\Persistance\Persistable;
 
 class Person extends Party {
 
-  use Associations;
   use Persistable;
   use Contactable;
   use Validating;
@@ -55,7 +54,7 @@ class Person extends Party {
    */
   public function __construct(Connection $connection, array $attributes =[])
   {
-    $this->connection = $connection;
+    parent::__construct($connection);
 
     $this->fill($attributes);
 

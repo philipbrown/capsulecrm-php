@@ -5,6 +5,7 @@ use PhilipBrown\CapsuleCRM\Querying\Findable;
 class Party extends Model {
 
   use Findable;
+  use Associations;
   use Serializable;
 
   /**
@@ -44,6 +45,8 @@ class Party extends Model {
   public function __construct(Connection $connection)
   {
     $this->connection = $connection;
+
+    $this->hasMany('tasks');
   }
 
 }
