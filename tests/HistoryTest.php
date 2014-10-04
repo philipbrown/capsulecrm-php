@@ -1,6 +1,7 @@
 <?php
 
 use Mockery as m;
+use PhilipBrown\CapsuleCRM\Person;
 use PhilipBrown\CapsuleCRM\History;
 
 class HistoryTest extends PHPUnit_Framework_TestCase
@@ -19,6 +20,27 @@ class HistoryTest extends PHPUnit_Framework_TestCase
         $this->connection = m::mock('PhilipBrown\CapsuleCRM\Connection');
         $this->model = new History($this->connection);
         $this->message = m::mock('Guzzle\Http\Message\Response');
+    }
+
+    /** @test */
+    public function should_find_belongs_to_id()
+    {
+        $this->model->party = new Person($this->connection, ['id' => '123']);
+        $this->assertEquals('123', $this->model->belongsToId());
+    }
+
+    /** @test */
+    public function should_find_belongs_to_name()
+    {
+        $this->model->party = new Person($this->connection);
+        $this->assertEquals('person', $this->model->belongsToName());
+    }
+
+    /** @test */
+    public function should_find_belongs_to_api_name()
+    {
+        $this->model->party = new Person($this->connection);
+        $this->assertEquals('party', $this->model->belongsToApiName());
     }
 
     /** @test */

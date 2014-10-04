@@ -37,7 +37,11 @@ class OrganisationTest extends PHPUnit_Framework_TestCase
         );
 
         $stub = json_decode(file_get_contents(dirname(__FILE__).'/stubs/post/organisation.json'), true);
+        $organisation = json_decode($organisation->toJson(), true);
 
-        $this->assertEquals(json_encode($stub), $organisation->toJson());
+        ksort($stub['organisation']);
+        ksort($organisation['organisation']);
+
+        $this->assertEquals(json_encode($stub), json_encode($organisation));
     }
 }

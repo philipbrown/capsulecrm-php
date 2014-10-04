@@ -113,6 +113,16 @@ class Serializer
     {
         $attributes = [];
 
+        foreach ($this->model->attributes() as $name => $attribute) {
+            if ($attribute instanceof \DateTime) {
+                $attributes[$name] = $attribute->format('Y-m-d\TH:i:s\Z');
+            }
+
+            else {
+                $attributes[$name] = $attribute;
+            }
+        }
+
         foreach ($this->options['additional_methods'] as $method) {
             $attributes = array_merge($attributes, [$method => json_decode($this->model->$method()->toJson())]);
         }
@@ -126,8 +136,6 @@ class Serializer
                 }
             }
         }
-
-        $attributes = array_merge($attributes, $this->model->attributes());
 
         return $attributes;
     }

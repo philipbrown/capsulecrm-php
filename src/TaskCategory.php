@@ -3,10 +3,9 @@
 use PhilipBrown\CapsuleCRM\Querying\FindAll;
 use PhilipBrown\CapsuleCRM\Querying\Configuration;
 
-class User extends Model {
+class TaskCategory extends Model {
 
   use FindAll;
-  use Associations;
   use Configuration;
   use Serializable;
 
@@ -17,12 +16,27 @@ class User extends Model {
    */
   protected $fillable = [
     'id',
-    'username',
-    'name',
-    'currency',
-    'timezone',
-    'logged_in',
-    'party_id'
+    'name'
+  ];
+
+    /**
+     * The model's queryable options
+     *
+     * @var array
+     */
+    protected $queryableOptions = [
+        'plural' => 'task/categories'
+    ];
+
+  /**
+   * The model's serializble config
+   *
+   * @var array
+   */
+  protected $serializableConfig = [
+    'root' => 'taskCategory',
+    'collection_root' => 'taskCategories',
+    'attribute_to_assign' => 'name'
   ];
 
   /**
@@ -36,22 +50,11 @@ class User extends Model {
   {
     $this->connection = $connection;
 
-    if (isset($attributes['username'])) {
-      $attributes['id'] = $attributes['username'];
+    if (isset($attributes['name'])) {
+      $attributes['id'] = $attributes['name'];
     }
 
     $this->fill($attributes);
-
-    $this->belongsTo('party', ['class_name' => 'Party']);
-  }
-
-  public function findByUserName($username)
-  {
-    foreach($this->all() as $user) {
-      if ($user->username == $username) {
-        return $user;
-      }
-    }
   }
 
 }

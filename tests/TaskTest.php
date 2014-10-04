@@ -2,6 +2,7 @@
 
 use Mockery as m;
 use PhilipBrown\CapsuleCRM\Task;
+use PhilipBrown\CapsuleCRM\Person;
 
 class TaskTest extends PHPUnit_Framework_TestCase
 {
@@ -30,6 +31,14 @@ class TaskTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function should_create_url()
+    {
+        $this->model->party = new Person($this->connection, ['id' => '123']);
+
+        $this->assertEquals('party/123/task', $this->model->createUrl());
+    }
+
+    /** @test */
     public function find_task_by_id()
     {
         $response = file_get_contents(dirname(__FILE__).'/stubs/get/task.json');
@@ -51,7 +60,7 @@ class TaskTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function find_all_cases()
+    public function find_all_tasks()
     {
         $response = file_get_contents(dirname(__FILE__).'/stubs/get/tasks.json');
         $this->message->shouldReceive('json')->andReturn(json_decode($response, true));

@@ -163,16 +163,22 @@ class Normalizer {
     $type = (string) $this->collectionRoot();
     $root = (string) $this->root();
 
-    foreach($attributes[$type][$root] as $entity)
-    {
-      if($this->attributeToAssign())
-      {
-        $collection[] = $this->createNewModelInstance($root, [$this->attributeToAssign() => $entity]);
-      }
+    if ($this->isAssociativeArray($attributes[$type][$root])) {
+      $collection[] = $this->createNewModelInstance($root, $attributes[$type][$root]);
+    }
 
-      else
+    else {
+      foreach($attributes[$type][$root] as $entity)
       {
-        $collection[] = $this->createNewModelInstance($root, $entity);
+        if($this->attributeToAssign())
+        {
+          $collection[] = $this->createNewModelInstance($root, [$this->attributeToAssign() => $entity]);
+        }
+
+        else
+        {
+          $collection[] = $this->createNewModelInstance($root, $entity);
+        }
       }
     }
 

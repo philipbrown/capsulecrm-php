@@ -34,7 +34,7 @@ class Options
      */
     public function create()
     {
-        if (isset($this->options['create'])) return $this->options['create']();
+        if (isset($this->options['create'])) return $this->options['create']($this->model);
 
         return $this->model->base()->lowercase()->plural();
     }
@@ -46,7 +46,7 @@ class Options
      */
     public function update()
     {
-        if (isset($this->options['update'])) return $this->options['update']();
+        if (isset($this->options['update'])) return $this->options['update']($this->model);
 
         return $this->model->base()->lowercase()->singular().'/'.$this->model->id;
     }
@@ -58,7 +58,7 @@ class Options
      */
     public function delete()
     {
-        if (isset($this->options['delete'])) return $this->options['delete']();
+        if (isset($this->options['delete'])) return $this->options['delete']($this->model);
 
         return $this->model->base()->lowercase()->singular().'/'.$this->model->id;
     }

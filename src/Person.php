@@ -62,8 +62,8 @@ class Person extends Party {
     $this->contacts = new Contacts;
 
     $this->persistableConfig = [
-      'create' => function (){ return 'person'; },
-      'delete' => function (){ return "party/$this->id"; }
+      'create' => function ($this){ return 'person'; },
+      'delete' => function ($this){ return "party/$this->id"; }
     ];
 
     $this->belongsTo('organisation');

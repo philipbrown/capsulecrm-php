@@ -34,7 +34,6 @@ class UserTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(2, $collection->count());
 
         $this->assertInstanceOf('PhilipBrown\CapsuleCRM\User', $collection[0]);
-        $this->assertEquals('2', $collection[0]->id);
         $this->assertEquals('a.user', $collection[0]->username);
         $this->assertEquals('Alfred User', $collection[0]->name);
         $this->assertEquals('GBP', $collection[0]->currency);
@@ -43,7 +42,6 @@ class UserTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('100', $collection[0]->party_id);
 
         $this->assertInstanceOf('PhilipBrown\CapsuleCRM\User', $collection[1]);
-        $this->assertEquals('3', $collection[1]->id);
         $this->assertEquals('j.joe', $collection[1]->username);
         $this->assertEquals('Jane Doe', $collection[1]->name);
         $this->assertEquals('GBP', $collection[1]->currency);

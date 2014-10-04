@@ -191,7 +191,7 @@ abstract class Model {
    */
   public function __set($key, $value)
   {
-    if($this->isFillable($key))
+    if(! is_object($value) && $this->isFillable($key))
     {
       return $this->setAttribute($key, $value);
     }

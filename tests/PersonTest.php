@@ -57,8 +57,12 @@ class PersonTest extends PHPUnit_Framework_TestCase
         );
 
         $stub = json_decode(file_get_contents(dirname(__FILE__).'/stubs/post/person.json'), true);
+        $person = json_decode($person->toJson(), true);
 
-        $this->assertEquals(json_encode($stub), $person->toJson());
+        ksort($stub['person']);
+        ksort($person['person']);
+
+        $this->assertEquals(json_encode($stub), json_encode($person));
     }
 }
 
